@@ -9,11 +9,10 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 
 const IndexScreen = ({ navigation }) => {
     // const { data, addBlogPost } = useContext(BlogContext);
-    const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+    const { state, deleteBlogPost } = useContext(Context);
 
     return (
       <View>
-          <Button title="Add Post" onPress={addBlogPost}/>
         <FlatList
             keyExtractor={(blogPost) => blogPost.title}
             data={state}
@@ -35,6 +34,16 @@ const IndexScreen = ({ navigation }) => {
       </View>
     );
 }
+
+IndexScreen.navigationOptions = () => {
+    return {
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+            <Feather name="plus" size={30} />
+          </TouchableOpacity>
+        ),
+      };
+};
 
 const styles = StyleSheet.create({
    row: {
